@@ -1,7 +1,14 @@
 import { createStore } from 'redux';
 
 const reducer = (state, action) => {
-  return state
-}
+  if (action.type === "ADD_TO_LIST_RECORDS") {
+    return{
+      ...state,
+      employee_records: state.employee_records.concat(action.employee_record)
+    };
+  }
 
-export default createStore(reducer);
+  return state
+};
+
+export default createStore(reducer, {employee_records: []});

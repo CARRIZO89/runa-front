@@ -11,7 +11,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NewEmployee />
+        <NewEmployeeRecord />
+        <MyRecords />
       </div>
     );
   }

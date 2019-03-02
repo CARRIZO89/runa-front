@@ -1,43 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Table } from 'react-bootstrap';
-import store from '../store';
+import { connect } from 'react-redux';
 
-class MyRecords extends Component {
-  constructor() {
-    super();
-    this.state = {
-      my_records: [
-      {in: '2019-01-27T01:05:00.000Z', out: '2019-02-27T07:05:00.000Z'},
-      {in: '2019-01-28T02:05:00.000Z', out: '2019-02-27T05:05:00.000Z'},
-      {in: '2019-01-29T03:05:00.000Z', out: ''}
-      ]
-    }
-  }
-
-  render(){
-    return(
-     <Table responsive>
-       <thead>
-         <tr>
-           <th>In</th>
-           <th>Out</th>
+export const MyRecords = (props) => {
+  return(
+   <Table responsive>
+     <thead>
+       <tr>
+         <th>In</th>
+         <th>Out</th>
+       </tr>
+     </thead>
+     <tbody>
+       {props.employee_records.map((er, index) =>
+         <tr id="er" key={index}>
+           <td>
+             {er.in_employee}
+           </td>
+           <td>
+             {er.out_employee}
+           </td>
          </tr>
-       </thead>
-       <tbody>
-         {this.state.my_records.map((er, index) =>
-           <tr id="er" key={index}>
-             <td>
-               {er.in}
-             </td>
-             <td>
-               {er.out}
-             </td>
-           </tr>
-         )}
-       </tbody>
-     </Table>
-    );
+       )}
+     </tbody>
+   </Table>
+  );
+}
+
+const mapStateToProps = state => {
+  return{
+    employee_records: state.employee_records
   }
 }
 
-export default MyRecords;
+export default connect(mapStateToProps)(MyRecords);
