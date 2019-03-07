@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import store from '../store';
+import { connect } from 'react-redux';
+import { loadEmployeeRecords } from '../actionCreators';
+
+store.dispatch(loadEmployeeRecords());
 
 class EmployeeRecords extends Component {
-  constructor() {
-    super();
-    this.state = {
-      employee_records: [
-      {id: 1, first_name: "Miguel", last_name: "Carrizo", in: '2019-02-27T01:05:00.000Z', out: ''},
-      {id: 2, first_name: "Maria", last_name: "Lopez", in: '2019-02-27T02:05:00.000Z', out: '2019-02-27T05:05:00.000Z'},
-      {id: 3, first_name: "Lucas", last_name: "Garcia", in: '2019-02-27T03:05:00.000Z', out: ''}
-      ]
-    }
-  }
 
   render(){
     return(
@@ -26,7 +20,7 @@ class EmployeeRecords extends Component {
          </tr>
        </thead>
        <tbody>
-         {this.state.employee_records.map((er, index) =>
+         {this.props.employee_records.map((er, index) =>
            <tr id="er" key={index}>
              <td>
                {er.first_name}
@@ -48,4 +42,10 @@ class EmployeeRecords extends Component {
   }
 }
 
-export default EmployeeRecords;
+const mapStateToProps = state => {
+  return{
+    employee_records: state.employee_records
+  };
+};
+
+export default connect(mapStateToProps)(EmployeeRecords);
