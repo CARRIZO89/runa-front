@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'react-bootstrap';
-import store from '../store';
+import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadEmployees, setCurrentEmployee } from '../actionCreators';
 import { withRouter, Link } from 'react-router-dom';

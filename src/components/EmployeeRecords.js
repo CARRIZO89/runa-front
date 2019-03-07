@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
-import store from '../store';
 import { connect } from 'react-redux';
 import { loadEmployeeRecords } from '../actionCreators';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class EmployeeRecords extends Component {
   componentDidMount(){
@@ -32,6 +31,9 @@ class EmployeeRecords extends Component {
              <td>
                {employee_record.out_employee}
              </td>
+             <td>
+                <Link to={`/employee/${employee_record.user_id}/new_employee_record`}>Update Record</Link>
+             </td>
            </tr>
          )}
        </tbody>
@@ -43,15 +45,15 @@ class EmployeeRecords extends Component {
 const mapStateToProps = state => {
   return{
     employee_records: state.employee_records
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return{
     loadEmployeeRecords(){
       dispatch(loadEmployeeRecords());
     }
-  };
-};
+  }
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EmployeeRecords));
