@@ -67,7 +67,7 @@ const loadEmployeeRecords = () => {
     }).then(response => {
       dispatch({
         type: "LOAD_EMPLOYEE_RECORDS",
-        employee_records: response.data
+        employee_records: response.data.employee_records
       });
     });
   }
@@ -148,6 +148,31 @@ const newEmployee = employee => {
   }
 };
 
+const editEmployee = employee => {
+  return (dispatch, getState) => {
+    axios({
+      method: 'PUT',
+      headers: { 'access-token': getState().token,
+                 'client': getState().client,
+                 'uid': getState().uid  },
+      url: `http://localhost:3000/api/v1/employees/${employee.id}`,
+      data: {
+        employee: {
+          legajo: employee.legajo,
+          first_name: employee.first_name,
+          last_name: employee.last_name,
+          email: employee.email
+        }
+      }
+    }).then(response => {
+      dispatch({
+        type: "NEW_EMPLOYEE",
+        employee
+      })
+    });
+  }
+};
+
 const setCurrentEmployee = current_employee => {
   return {
     type: "SET_CURRENT_EMPLOYEE",
@@ -155,8 +180,8 @@ const setCurrentEmployee = current_employee => {
   }
 };
 
-export { newSession, destroySession, 
-        loadEmployees, loadEmployeeRecords, 
-        loadMyRecords, newEmployee, 
-        newEmployeeRecord, updateEmployeeRecord, 
+export { newSession, destroySession,
+        loadEmployees, loadEmployeeRecords,
+        loadMyRecords, newEmployee, editEmployee,
+        newEmployeeRecord, updateEmployeeRecord,
         setCurrentEmployee };

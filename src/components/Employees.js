@@ -10,7 +10,7 @@ class Employees extends Component {
     this.props.loadEmployees();
   }
 
-  newRecord(employee) {
+  currentEmployee(employee) {
     this.props.setCurrentEmployee(employee);
   }
 
@@ -37,7 +37,10 @@ class Employees extends Component {
                {employee.last_name}
              </td>
              <td>
-              <Link to={`/employee/${employee.id}/new_employee_record`} onClick={() => this.newRecord(employee)}>New Record</Link>
+              <Link to={`/employee/${employee.id}/edit_employee`} onClick={() => this.currentEmployee(employee)}>Edit Employee</Link>
+              </td>
+             <td>
+              <Link to={`/employee/${employee.id}/new_employee_record`} onClick={() => this.currentEmployee(employee)}>New Record</Link>
               </td>
            </tr>
          )}
@@ -59,7 +62,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(loadEmployees());
     },
     setCurrentEmployee(current_employee){
-      dispatch(setCurrentEmployee(current_employee))
+      dispatch(setCurrentEmployee(current_employee));
     }
   }
 }

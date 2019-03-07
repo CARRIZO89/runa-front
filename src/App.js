@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import Login from './components/Login';
 import Employees from './components/Employees'
 import NewEmployee from './components/NewEmployee'
+import EditEmployee from './components/EditEmployee'
 import EmployeeRecords from './components/EmployeeRecords';
 import MyRecords from './components/MyRecords';
 import NewEmployeeRecord from './components/NewEmployeeRecord'
@@ -29,6 +30,7 @@ class App extends Component {
             <AdminRoute path="/employees" component={Employees}/>
             <AdminRoute path="/employee_records" component={EmployeeRecords}/>
             <AdminRoute path="/new_employee" component={NewEmployee}/>
+            <AdminRoute path="/employee/:id/edit_employee" component={EditEmployee}/>
             <AdminRoute path="/employee/:id/new_employee_record" component={NewEmployeeRecord}/>
             <EmployeeRoute path="/my_records" component={MyRecords}/>
           </React.Fragment>

@@ -3,36 +3,34 @@ import { Table } from 'react-bootstrap';
 import store from '../store';
 import { connect } from 'react-redux';
 import { loadEmployeeRecords } from '../actionCreators';
-
-store.dispatch(loadEmployeeRecords());
+import { withRouter } from 'react-router-dom';
 
 class EmployeeRecords extends Component {
+  componentDidMount(){
+    this.props.loadEmployeeRecords();
+  }
 
   render(){
     return(
      <Table responsive>
        <thead>
          <tr>
-           <th>First Name</th>
-           <th>Last Name</th>
+           <th>Employee ID</th>
            <th>In</th>
            <th>Out</th>
          </tr>
        </thead>
        <tbody>
-         {this.props.employee_records.map((er, index) =>
-           <tr id="er" key={index}>
+         {this.props.employee_records.map((employee_record, index) =>
+           <tr id="employee_record" key={index}>
              <td>
-               {er.first_name}
+               {employee_record.user_id}
              </td>
              <td>
-               {er.last_name}
+               {employee_record.in_employee}
              </td>
              <td>
-               {er.in}
-             </td>
-             <td>
-               {er.out}
+               {employee_record.out_employee}
              </td>
            </tr>
          )}
@@ -48,4 +46,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(EmployeeRecords);
+const mapDispatchToProps = dispatch => {
+  return{
+    loadEmployeeRecords(){
+      dispatch(loadEmployeeRecords());
+    }
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EmployeeRecords));
