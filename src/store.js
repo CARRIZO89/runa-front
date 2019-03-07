@@ -53,7 +53,7 @@ const reducer = (state, action) => {
   } else if (action.type === "NEW_EMPLOYEE") {
     return{
       ...state,
-      employees: [...state.employees, action.employee]
+      employees: state.employees.concat(action.employee)
     };
   }else if (action.type === "SET_CURRENT_EMPLOYEE") {
     return{

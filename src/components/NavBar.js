@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav } from 'react-bootstrap';
+import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { destroySession } from '../actionCreators';
@@ -11,30 +11,29 @@ class NavBar extends Component {
 
   renderEmployeeLinks() {
     return (
-      <div>
-        <Nav.Item>
-          <Link to="/my_records">My Records</Link>
-        </Nav.Item>
-      </div>
+      <Navbar bg="light" variant="light">
+        <Navbar.Brand><Link to="/my_records">My Records</Link></Navbar.Brand>
+        <Navbar.Brand>
+          <Nav.Link type="submit" onClick={() => this.destroySession(this.props.current_user)}>
+            Sing Out
+          </Nav.Link>
+        </Navbar.Brand>
+      </Navbar>
     )
   }
 
   renderAdminLinks() {
     return (
-      <div>
-        <Nav.Item>
-          <Link to="/employees">Employees</Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Link to="/employee_records">Employee Records</Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Link to="/new_employee">New Employee</Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Link to="/employee/{current_user.id}/new_employee_record">New Employee Record</Link>
-        </Nav.Item>
-      </div>
+      <Navbar bg="light" variant="light">
+        <Navbar.Brand><Link to="/employees">Employees</Link></Navbar.Brand>
+        <Navbar.Brand><Link to="/employee_records">Employee Records</Link></Navbar.Brand>
+        <Navbar.Brand><Link to="/new_employee">New Employee</Link></Navbar.Brand>
+        <Navbar.Brand>
+          <Nav.Link type="submit" onClick={() => this.destroySession(this.props.current_user)}>
+            Sing Out
+          </Nav.Link>
+        </Navbar.Brand>
+      </Navbar>
     )
   }
 
@@ -46,11 +45,6 @@ render() {
           ? this.renderEmployeeLinks() 
           : this.renderAdminLinks() 
         }
-        <Nav.Item>
-          <Nav.Link type="submit" onClick={() => this.destroySession(this.props.current_user)}>
-            Sing Out
-          </Nav.Link>
-        </Nav.Item>
       </Nav>
     )
   }

@@ -10,8 +10,8 @@ class Employees extends Component {
     this.props.loadEmployees();
   }
 
-  newRecord(em) {
-    this.props.setCurrentEmployee(em);
+  newRecord(employee) {
+    this.props.setCurrentEmployee(employee);
   }
 
   render(){
@@ -19,29 +19,25 @@ class Employees extends Component {
      <Table responsive>
        <thead>
          <tr>
-           <th>#</th>
            <th>Legajo</th>
            <th>First Name</th>
            <th>Last Name</th>
          </tr>
        </thead>
        <tbody>
-         {this.props.employees.map((em, index) =>
-           <tr id="em" key={index}>
+         {this.props.employees.map((employee, index) =>
+           <tr id="employee" key={index}>
              <td>
-               {em.id}
+               {employee.legajo}
              </td>
              <td>
-               {em.legajo}
+               {employee.first_name}
              </td>
              <td>
-               {em.first_name}
+               {employee.last_name}
              </td>
              <td>
-               {em.last_name}
-             </td>
-             <td>
-              <Link to={`/employee/${em.id}/new_employee_record`} onClick={() => this.newRecord(em)}>Record</Link>
+              <Link to={`/employee/${employee.id}/new_employee_record`} onClick={() => this.newRecord(employee)}>New Record</Link>
               </td>
            </tr>
          )}

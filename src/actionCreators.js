@@ -123,17 +123,21 @@ const updateEmployeeRecord = employee_record => {
 };
 
 const newEmployee = employee => {
-  return dispatch => {
+  return (dispatch, getState) => {
     axios({
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
+      headers: { 'access-token': getState().token,
+                 'client': getState().client,
+                 'uid': getState().uid  },
       url: `http://localhost:3000/api/v1/employees`,
       data: {
-        legajo: employee.legajo,
-        first_name: employee.first_name,
-        last_name: employee.last_name,
-        email: employee.email,
-        password: employee.password
+        employee: {
+          legajo: employee.legajo,
+          first_name: employee.first_name,
+          last_name: employee.last_name,
+          email: employee.email,
+          password: employee.password
+        }
       }
     }).then(response => {
       dispatch({

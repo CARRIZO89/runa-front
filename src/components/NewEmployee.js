@@ -36,7 +36,6 @@ class NewEmployee extends Component {
       email: this.state.employee.email,
       password: this.state.employee.password
     };
-
     this.hasEmptyFields(employee);
   }
 
@@ -47,8 +46,8 @@ class NewEmployee extends Component {
       alert('There are empty fields!');
     }else{
       this.props.newEmployee(employee);
-      this.setState({employee:{legajo: '', first_name: '', last_name: '', email: '', password: ''}});
       alert('The operation was successful');
+      this.setState({employee:{legajo: '', first_name: '', last_name: '', email: '', password: ''}});
     }
   }
 
