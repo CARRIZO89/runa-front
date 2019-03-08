@@ -84,7 +84,7 @@ const loadMyRecords = (current_user_id) => {
     }).then(response => {
       dispatch({
         type: "LOAD_MY_RECORDS",
-        my_records: response.data.employee_records
+        my_records: response.data
       });
     });
   }

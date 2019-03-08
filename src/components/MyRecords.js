@@ -22,13 +22,13 @@ class MyRecords extends Component {
              </tr>
            </thead>
            <tbody>
-             {this.props.my_records.map((er, index) =>
-               <tr id="er" key={index}>
+             {this.props.my_records.map((my_record, index) =>
+               <tr id="my_record" key={index}>
                  <td>
-                   {er.in_employee}
+                   {my_record.in_employee}
                  </td>
                  <td>
-                   {er.out_employee}
+                   {my_record.out_employee}
                  </td>
                </tr>
              )}
