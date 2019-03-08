@@ -37,7 +37,13 @@ class EmployeeRecords extends Component {
                {employee_record.out_employee}
              </td>
              <td>
-                <Link to={`/employee/${employee_record.user_id}/new_employee_record`}>Update Record</Link>
+                { employee_record.out_employee == null ? 
+                    <Link to={`/employee/${employee_record.user_id}/new_employee_record`}>
+                      Update Record
+                    </Link> 
+                  : 
+                    null
+                }
              </td>
            </tr>
          )}

@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadMyRecords } from '../actionCreators';
 import { withRouter } from 'react-router-dom';
+import NavBar from './NavBar';
 
 class MyRecords extends Component {
   componentDidMount() {
@@ -11,26 +12,29 @@ class MyRecords extends Component {
 
   render(){
     return(
-     <Table responsive>
-       <thead>
-         <tr>
-           <th>In</th>
-           <th>Out</th>
-         </tr>
-       </thead>
-       <tbody>
-         {this.props.my_records.map((er, index) =>
-           <tr id="er" key={index}>
-             <td>
-               {er.in_employee}
-             </td>
-             <td>
-               {er.out_employee}
-             </td>
-           </tr>
-         )}
-       </tbody>
-     </Table>
+      <div>
+         <NavBar />
+         <Table responsive>
+           <thead>
+             <tr>
+               <th>In</th>
+               <th>Out</th>
+             </tr>
+           </thead>
+           <tbody>
+             {this.props.my_records.map((er, index) =>
+               <tr id="er" key={index}>
+                 <td>
+                   {er.in_employee}
+                 </td>
+                 <td>
+                   {er.out_employee}
+                 </td>
+               </tr>
+             )}
+           </tbody>
+         </Table>
+      </div>
     );
   }
 }

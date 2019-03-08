@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import Login from './components/Login';
 import MyRecords from './components/MyRecords';
 import PanelAdmin from './components/PanelAdmin';
-import { BrowserRouter, Route, Redirect, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AdminRoute from './components/AdminRoute';
 import EmployeeRoute from './components/EmployeeRoute';
