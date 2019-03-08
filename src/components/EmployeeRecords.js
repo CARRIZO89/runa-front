@@ -9,6 +9,10 @@ class EmployeeRecords extends Component {
     this.props.loadEmployeeRecords();
   }
 
+  currentRecord(employee_record){
+    this.props.setCurrentRecord(employee_record);
+  }
+
   render(){
     return(
      <Table responsive>
@@ -17,6 +21,7 @@ class EmployeeRecords extends Component {
            <th>Employee ID</th>
            <th>In</th>
            <th>Out</th>
+           <th>Action</th>
          </tr>
        </thead>
        <tbody>

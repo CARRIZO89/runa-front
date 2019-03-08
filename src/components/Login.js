@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { newSession } from '../actionCreators';
 import { Redirect } from 'react-router-dom';
+import './CommonStyles.css';
 
 class Login extends Component {
   constructor(props){
@@ -54,7 +55,7 @@ class Login extends Component {
     return(
       redirectToReferrer ? 
         <Redirect to={from} /> : 
-        <Form onSubmit={this.handleSubmint}>
+        <Form  className="common-styles" onSubmit={this.handleSubmint}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" name='email' value={email} onChange={this.handleChange} required/>

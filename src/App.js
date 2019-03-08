@@ -7,31 +7,26 @@ import NewEmployee from './components/NewEmployee'
 import EditEmployee from './components/EditEmployee'
 import EmployeeRecords from './components/EmployeeRecords';
 import MyRecords from './components/MyRecords';
-import NewEmployeeRecord from './components/NewEmployeeRecord'
-import { BrowserRouter, Route } from 'react-router-dom';
+import NewEmployeeRecord from './components/NewEmployeeRecord';
+import PanelAdmin from './components/PanelAdmin';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AdminRoute from './components/AdminRoute';
 import EmployeeRoute from './components/EmployeeRoute';
-import NavBar from './components/NavBar';
 
 class App extends Component {
 
   render() {
     return (
       <div>
-
         <BrowserRouter>
           <React.Fragment>
-            { this.props.current_user ?
-              <NavBar />
+            { this.props.type_user === 'Admin' ?
+              <Redirect to="/admin" />
                :
-              null }
-            <Route path="/login" component={Login}/>
-            <AdminRoute path="/employees" component={Employees}/>
-            <AdminRoute path="/employee_records" component={EmployeeRecords}/>
-            <AdminRoute path="/new_employee" component={NewEmployee}/>
-            <AdminRoute path="/employee/:id/edit_employee" component={EditEmployee}/>
-            <AdminRoute path="/employee/:id/new_employee_record" component={NewEmployeeRecord}/>
+              <Redirect to="/my_records" /> }
+            <Route exact path="/login" component={Login}/>
+            <AdminRoute path="/admin" component={PanelAdmin}/>
             <EmployeeRoute path="/my_records" component={MyRecords}/>
           </React.Fragment>
         </BrowserRouter>
@@ -42,7 +37,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return{
-    current_user: state.current_user
+    current_user: state.current_user,
+    type_user: state.type_user
   };
 };
 

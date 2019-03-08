@@ -21,6 +21,8 @@ class Employees extends Component {
            <th>Legajo</th>
            <th>First Name</th>
            <th>Last Name</th>
+           <th>Actions</th>
+           <th></th>
          </tr>
        </thead>
        <tbody>
@@ -37,10 +39,10 @@ class Employees extends Component {
              </td>
              <td>
               <Link to={`/employee/${employee.id}/edit_employee`} onClick={() => this.currentEmployee(employee)}>Edit Employee</Link>
-              </td>
+             </td>
              <td>
               <Link to={`/employee/${employee.id}/new_employee_record`} onClick={() => this.currentEmployee(employee)}>New Record</Link>
-              </td>
+             </td>
            </tr>
          )}
        </tbody>

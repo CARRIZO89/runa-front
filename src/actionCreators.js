@@ -100,7 +100,8 @@ const newEmployeeRecord = employee_record => {
       url: `http://localhost:3000/api/v1/employees/${employee_record.user_id}/employee_records`,
     }).then(response => {
       dispatch({
-        type: "NEW_EMPLOYEE_RECORD"
+        type: "NEW_EMPLOYEE_RECORD",
+        employee_record
       })
     });
   }
@@ -184,4 +185,4 @@ export { newSession, destroySession,
         loadEmployees, loadEmployeeRecords,
         loadMyRecords, newEmployee, editEmployee,
         newEmployeeRecord, updateEmployeeRecord,
-        setCurrentEmployee };
+        setCurrentEmployee};

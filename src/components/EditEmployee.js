@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, FormControl, Button, Row, Col } from 'react-bootstrap';
 import { editEmployee } from '../actionCreators';
 import { connect } from 'react-redux';
+import './CommonStyles.css';
 
 class EditEmployee extends Component {
   constructor(props){
@@ -56,8 +57,7 @@ class EditEmployee extends Component {
     return(
       <div>
         <Row>
-          <Col md={6}>
-            <Form onSubmit={this.handleSubmit}>
+          <Form className="common-styles" onSubmit={this.handleSubmit}>
             <h1>Employee</h1>
               <FormControl type="text" placeholder="Legajo" name='legajo' value={legajo} onChange={this.handleChange} required/>
               <FormControl type="text" placeholder="First name" name='first_name' value={first_name} onChange={this.handleChange} required/>
@@ -65,7 +65,6 @@ class EditEmployee extends Component {
               <FormControl type="text" placeholder="Email" name='email' value={email} onChange={this.handleChange} required/>
               <Button type="submit">Aceptar</Button>
             </Form>
-          </Col>
         </Row>
       </div>
     );
