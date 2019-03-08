@@ -33,7 +33,7 @@ class NewEmployeeRecord extends Component {
       })
     });
   }
-  
+
   handleChange = (event) => {
     const { name, value } = event.target;
     let employee_record = this.state.employee_record;

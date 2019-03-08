@@ -9,7 +9,7 @@ import EmployeeRecords from './components/EmployeeRecords';
 import MyRecords from './components/MyRecords';
 import NewEmployeeRecord from './components/NewEmployeeRecord';
 import PanelAdmin from './components/PanelAdmin';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Link, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AdminRoute from './components/AdminRoute';
 import EmployeeRoute from './components/EmployeeRoute';
@@ -21,13 +21,12 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <React.Fragment>
-            { this.props.type_user === 'Admin' ?
-              <Redirect to="/admin" />
-               :
-              <Redirect to="/my_records" /> }
-            <Route exact path="/login" component={Login}/>
-            <AdminRoute path="/admin" component={PanelAdmin}/>
-            <EmployeeRoute path="/my_records" component={MyRecords}/>
+            <Switch>
+              <Route exact path="/" render={() => <Link to="/login">Login</Link> } />
+              <Route exact path="/login" component={Login}/>
+              <AdminRoute path="/admin" component={PanelAdmin}/>
+              <EmployeeRoute path="/my_records" component={MyRecords}/>
+            </Switch>
           </React.Fragment>
         </BrowserRouter>
       </div>
