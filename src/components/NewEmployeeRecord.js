@@ -4,13 +4,14 @@ import { newEmployeeRecord, updateEmployeeRecord } from '../actionCreators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
+import '../assets/styles/CommonStyles.css';
 
 class NewEmployeeRecord extends Component {
   constructor(props) {
     super(props);
     this.state = {
       employee_record: {
-        employee_id: props.current_employee.id,
+        employee_id: this.props.match.params.id,
         in_employee: null,
         out_employee: null
       },
@@ -32,7 +33,7 @@ class NewEmployeeRecord extends Component {
       })
     });
   }
-  
+
   handleChange = (event) => {
     const { name, value } = event.target;
     let employee_record = this.state.employee_record;
@@ -70,7 +71,7 @@ class NewEmployeeRecord extends Component {
     const { user_id, in_employee, out_employee } = employee_record
 
     if (user_id === '' || in_employee === '' || out_employee === '') {
-      alert('¡There can´t empty fields!')
+      alert('There are empty fields!')
     }else{
       this.isIn() 
         ? this.props.newEmployeeRecord(employee_record)
@@ -88,16 +89,16 @@ class NewEmployeeRecord extends Component {
     return(
         saved 
         ? <Redirect to={{ pathname: "/employees", state: { from: this.props.location } }} />
-        : <Form onSubmit={this.handleSubmit}>
+        : <Form className="common-styles" onSubmit={this.handleSubmit}>
         <h1>New Employee Record</h1>
         <Col>
-          <FormControl type="text" placeholder="Employee ID" name='employee_id' value={employee_id} onChange={this.handleChange}/>
+          <FormControl type="text" placeholder="Employee ID" name='employee_id' value={employee_id} readonly/>
         </Col>
         <Col>
-          <FormControl type="text" placeholder="In" name='in_employee' value={in_employee} onChange={this.handleChange}/>
+          <FormControl type="text" placeholder="In" name='in_employee' value={in_employee} readonly/>
         </Col>
         <Col>
-          <FormControl  type="text" placeholder="Out" name='out_employee' value={out_employee} onChange={this.handleChange}/>
+          <FormControl  type="text" placeholder="Out" name='out_employee' value={out_employee} readonly/>
         </Col>
         <Button variant="primary" type="submit">
           { this.isIn() ? 'Save In' : 'Update Out' }

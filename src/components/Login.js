@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { newSession } from '../actionCreators';
 import { Redirect } from 'react-router-dom';
+import '../assets/styles/CommonStyles.css';
 
 class Login extends Component {
   constructor(props){
@@ -47,36 +48,40 @@ class Login extends Component {
   }
 
   render(){
-    let { from } = this.props.location.state || { from: { pathName: "/new_employee" } }
+    const redirectPath = this.props.type_user === 'Admin' ? '/admin' : "/my_records"
     const { email, password } = this.state.employee
-    const { redirectToReferrer } = this.props
+    const { current_user } = this.props
+
+    if (current_user) {
+      return <Redirect to={redirectPath} />
+    }
+
 
     return(
-      redirectToReferrer ? 
-        <Redirect to={from} /> : 
-        <Form onSubmit={this.handleSubmint}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" name='email' value={email} onChange={this.handleChange} required/>
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+      <Form  className="common-styles" onSubmit={this.handleSubmint}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" name='email' value={email} onChange={this.handleChange} required/>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name='password' value={password} onChange={this.handleChange} required/>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" name='password' value={password} onChange={this.handleChange} required/>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
     );
   }
 }
 const mapStateToProps = state => {
   return{
-    redirectToReferrer: state.redirectToReferrer
+    current_user: state.current_user,
+    type_user: state.type_user
   };
 };
 

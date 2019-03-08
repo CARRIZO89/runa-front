@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
-import { Link, withRouter } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { destroySession } from '../actionCreators';
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sing_out: false
+    }
+  }
+
   destroySession(current_user){
-    this.props.destroySession(current_user)
+    this.props.destroySession(current_user);
+    this.setState({sing_out: true});
   }
 
   renderEmployeeLinks() {
     return (
       <Navbar bg="light" variant="light">
-        <Navbar.Brand><Link to="/my_records">My Records</Link></Navbar.Brand>
         <Navbar.Brand>
           <Nav.Link type="submit" onClick={() => this.destroySession(this.props.current_user)}>
             Sing Out
@@ -38,14 +45,19 @@ class NavBar extends Component {
   }
 
 render() {
+    const { sing_out } = this.state
+
     return(
-      <Nav activeKey="/home">
-        { 
-          this.props.type_user === 'Employee' 
-          ? this.renderEmployeeLinks() 
-          : this.renderAdminLinks() 
-        }
-      </Nav>
+      sing_out ? 
+        <Redirect to={{ pathname: "/", state: { from: this.props.location } }} /> 
+      : 
+        <Nav activeKey="/home">
+          { 
+            this.props.type_user === 'Employee' 
+            ? this.renderEmployeeLinks() 
+            : this.renderAdminLinks() 
+          }
+        </Nav>
     )
   }
 }

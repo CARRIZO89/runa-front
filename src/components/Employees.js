@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Button } from 'react-bootstrap';
-import store from '../store';
+import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadEmployees, setCurrentEmployee } from '../actionCreators';
 import { withRouter, Link } from 'react-router-dom';
@@ -10,7 +9,7 @@ class Employees extends Component {
     this.props.loadEmployees();
   }
 
-  newRecord(employee) {
+  currentEmployee(employee) {
     this.props.setCurrentEmployee(employee);
   }
 
@@ -22,6 +21,8 @@ class Employees extends Component {
            <th>Legajo</th>
            <th>First Name</th>
            <th>Last Name</th>
+           <th>Actions</th>
+           <th></th>
          </tr>
        </thead>
        <tbody>
@@ -37,8 +38,11 @@ class Employees extends Component {
                {employee.last_name}
              </td>
              <td>
-              <Link to={`/employee/${employee.id}/new_employee_record`} onClick={() => this.newRecord(employee)}>New Record</Link>
-              </td>
+              <Link to={`/employee/${employee.id}/edit_employee`} onClick={() => this.currentEmployee(employee)}>Edit Employee</Link>
+             </td>
+             <td>
+              <Link to={`/employee/${employee.id}/new_employee_record`} onClick={() => this.currentEmployee(employee)}>New Record</Link>
+             </td>
            </tr>
          )}
        </tbody>
@@ -59,7 +63,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(loadEmployees());
     },
     setCurrentEmployee(current_employee){
-      dispatch(setCurrentEmployee(current_employee))
+      dispatch(setCurrentEmployee(current_employee));
     }
   }
 }

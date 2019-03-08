@@ -10,7 +10,12 @@ const logger = store => next => action => {
   return result
 }
 
-const reducer = (state, action) => {
+const middlewares = [thunk, logger]
+
+const initialState = {current_user: null, my_records: [], 
+                      employees: [], employee_records: []}
+
+const reducer = (state = initialState, action) => {
   if (action.type === "NEW_SESSION") {
     return{
       ...state,
@@ -65,6 +70,7 @@ const reducer = (state, action) => {
   return state
 };
 
-export default createStore(reducer, {current_user: null, my_records: [], 
-                                     employees: [], employee_records: []},
-                                     applyMiddleware(thunk, logger));
+export default createStore(
+  reducer, 
+  applyMiddleware(...middlewares)
+);
