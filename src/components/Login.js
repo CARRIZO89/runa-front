@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { newSession } from '../actionCreators';
 import { Redirect } from 'react-router-dom';
-import './CommonStyles.css';
+import '../assets/styles/CommonStyles.css';
 
 class Login extends Component {
   constructor(props){

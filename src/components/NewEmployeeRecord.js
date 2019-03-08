@@ -4,7 +4,7 @@ import { newEmployeeRecord, updateEmployeeRecord } from '../actionCreators';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
-import './CommonStyles.css';
+import '../assets/styles/CommonStyles.css';
 
 class NewEmployeeRecord extends Component {
   constructor(props) {

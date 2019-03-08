@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Form, FormControl, Button, Row, Col } from 'react-bootstrap';
+import { Form, FormControl, Button, Row } from 'react-bootstrap';
 import { editEmployee } from '../actionCreators';
 import { connect } from 'react-redux';
-import './CommonStyles.css';
+import '../assets/styles/CommonStyles.css';
 
 class EditEmployee extends Component {
   constructor(props){
